@@ -1,0 +1,17 @@
+charset,UTF-8
+
+name,Pomogaka
+type,ghost
+
+shiori,yaya.dll
+
+craftman,Vita/yuyudev
+craftmanw,Vita/yuyudev
+craftmanurl,https://thatoddhaystack.neocities.org/ukagaka/
+
+sakura.name,Pomogaka
+kero.name,
+
+icon,icon.ico
+
+sstp.allowunspecifiedsend,0

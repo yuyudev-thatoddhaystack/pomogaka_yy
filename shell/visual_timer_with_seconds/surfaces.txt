@@ -1,0 +1,196 @@
+//Free to use as a base for your pomogaka shells
+
+descript
+{
+	version,1
+}
+
+surface0
+{
+    //base
+	element0,base,base.png,0,0
+    
+    //separators
+	element1,overlay,center.png,100,0
+    element2,overlay,center.png,250,0
+
+
+    //hours tens place
+    animation0.interval,never
+    animation0.pattern0,overlay,100,0,0,0
+    animation1.interval,never
+    animation1.pattern0,overlay,101,0,0,0
+    animation2.interval,never
+    animation2.pattern0,overlay,102,0,0,0
+    animation3.interval,never
+    animation3.pattern0,overlay,103,0,0,0
+    animation4.interval,never
+    animation4.pattern0,overlay,104,0,0,0
+    animation5.interval,never
+    animation5.pattern0,overlay,105,0,0,0
+    animation6.interval,never
+    animation6.pattern0,overlay,106,0,0,0
+    animation7.interval,never
+    animation7.pattern0,overlay,107,0,0,0
+    animation8.interval,never
+    animation8.pattern0,overlay,108,0,0,0
+    animation9.interval,never
+    animation9.pattern0,overlay,109,0,0,0
+
+    //hours ones place
+    animation10.interval,never
+    animation10.pattern0,overlay,100,0,50,0
+    animation11.interval,never
+    animation11.pattern0,overlay,101,0,50,0
+    animation12.interval,never
+    animation12.pattern0,overlay,102,0,50,0
+    animation13.interval,never
+    animation13.pattern0,overlay,103,0,50,0
+    animation14.interval,never
+    animation14.pattern0,overlay,104,0,50,0
+    animation15.interval,never
+    animation15.pattern0,overlay,105,0,50,0
+    animation16.interval,never
+    animation16.pattern0,overlay,106,0,50,0
+    animation17.interval,never
+    animation17.pattern0,overlay,107,0,50,0
+    animation18.interval,never
+    animation18.pattern0,overlay,108,0,50,0
+    animation19.interval,never
+    animation19.pattern0,overlay,109,0,50,0
+
+    //minutes tens place
+    animation20.interval,never
+    animation20.pattern0,overlay,100,0,150,0
+    animation21.interval,never
+    animation21.pattern0,overlay,101,0,150,0
+    animation22.interval,never
+    animation22.pattern0,overlay,102,0,150,0
+    animation23.interval,never
+    animation23.pattern0,overlay,103,0,150,0
+    animation24.interval,never
+    animation24.pattern0,overlay,104,0,150,0
+    animation25.interval,never
+    animation25.pattern0,overlay,105,0,150,0
+    animation26.interval,never
+    animation26.pattern0,overlay,106,0,150,0
+    animation27.interval,never
+    animation27.pattern0,overlay,107,0,150,0
+    animation28.interval,never
+    animation28.pattern0,overlay,108,0,150,0
+    animation29.interval,never
+    animation29.pattern0,overlay,109,0,150,0
+
+    //minutes ones place
+    animation30.interval,never
+    animation30.pattern0,overlay,100,0,200,0
+    animation31.interval,never
+    animation31.pattern0,overlay,101,0,200,0
+    animation32.interval,never
+    animation32.pattern0,overlay,102,0,200,0
+    animation33.interval,never
+    animation33.pattern0,overlay,103,0,200,0
+    animation34.interval,never
+    animation34.pattern0,overlay,104,0,200,0
+    animation35.interval,never
+    animation35.pattern0,overlay,105,0,200,0
+    animation36.interval,never
+    animation36.pattern0,overlay,106,0,200,0
+    animation37.interval,never
+    animation37.pattern0,overlay,107,0,200,0
+    animation38.interval,never
+    animation38.pattern0,overlay,108,0,200,0
+    animation39.interval,never
+    animation39.pattern0,overlay,109,0,200,0
+
+    //seconds tens place
+    animation40.interval,never
+    animation40.pattern0,overlay,100,0,300,0
+    animation41.interval,never         
+    animation41.pattern0,overlay,101,0,300,0
+    animation42.interval,never         
+    animation42.pattern0,overlay,102,0,300,0
+    animation43.interval,never         
+    animation43.pattern0,overlay,103,0,300,0
+    animation44.interval,never         
+    animation44.pattern0,overlay,104,0,300,0
+    animation45.interval,never         
+    animation45.pattern0,overlay,105,0,300,0
+    animation46.interval,never         
+    animation46.pattern0,overlay,106,0,300,0
+    animation47.interval,never         
+    animation47.pattern0,overlay,107,0,300,0
+    animation48.interval,never         
+    animation48.pattern0,overlay,108,0,300,0
+    animation49.interval,never         
+    animation49.pattern0,overlay,109,0,300,0
+
+    //seconds ones place
+    animation50.interval,never
+    animation50.pattern0,overlay,100,0,350,0
+    animation51.interval,never         
+    animation51.pattern0,overlay,101,0,350,0
+    animation52.interval,never         
+    animation52.pattern0,overlay,102,0,350,0
+    animation53.interval,never         
+    animation53.pattern0,overlay,103,0,350,0
+    animation54.interval,never         
+    animation54.pattern0,overlay,104,0,350,0
+    animation55.interval,never         
+    animation55.pattern0,overlay,105,0,350,0
+    animation56.interval,never         
+    animation56.pattern0,overlay,106,0,350,0
+    animation57.interval,never         
+    animation57.pattern0,overlay,107,0,350,0
+    animation58.interval,never         
+    animation58.pattern0,overlay,108,0,350,0
+    animation59.interval,never         
+    animation59.pattern0,overlay,109,0,350,0
+}
+
+surface10 
+{
+
+}
+
+//individual digits
+surface100
+{
+element0,base,d0.png,0,0
+}
+surface101
+{
+element0,base,d1.png,0,0
+}
+surface102
+{
+element0,base,d2.png,0,0
+}
+surface103
+{
+element0,base,d3.png,0,0
+}
+surface104
+{
+element0,base,d4.png,0,0
+}
+surface105
+{
+element0,base,d5.png,0,0
+}
+surface106
+{
+element0,base,d6.png,0,0
+}
+surface107
+{
+element0,base,d7.png,0,0
+}
+surface108
+{
+element0,base,d8.png,0,0
+}
+surface109
+{
+element0,base,d9.png,0,0
+}

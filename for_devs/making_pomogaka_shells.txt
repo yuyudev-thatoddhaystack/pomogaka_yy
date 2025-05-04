@@ -1,0 +1,47 @@
+So you want to make a shell for pomogaka. Great!! 
+
+There is a small settings file (pomoshellsettings.txt) that pomogaka will check for in your shell's folder. If it doesnt find it, it will treat your shell as a static shell. 
+
+The settings file has two lines:
+
+visual_shell,0
+has_seconds,0
+
+Please set it up with those two lines, with either a 1 or 0 at the end of each lines. 1 is true and zero is false. This example is for a static shell. For a visual timer shell without seconds you would write this: 
+
+visual_shell,1
+has_seconds,0
+
+And lastly a visual timer shell WITH seconds would have this in its settings file:
+
+visual_shell,1
+has_seconds,1
+
+Making what I will refer to as a "static" shell is simple. By "static", I mean that there is not a timer displayed on the shell. You can still add animations and dressups to the shell, just keep in mind that the code only calls surface 0 for static shells. 
+
+If you want to make a "visual timer" shell it gets a bit more involved. 
+
+If you don't want to change the width of the timer from the default shell included with pomogaka, you are free to use the shell elements as a template for your shell. Just dont change the width of the canvas. This applies whether you have a visual timer shell with seconds or without. 
+
+If you want to change the width of the shell, or change the format so that it's not just a horizontal line, you'll have to edit the surfaces.txt coding. 
+
+I will explain how the default shell is set up.
+
+The "base" of the visual timer is 5 times the width of the individual digits + separator (for the visual timer with seconds, the base is 8 times the width of an individual digit, since it includes one additional separator and two additional digits). I set up the default shell so that the separator (:) elements are separate from the base, but you can add them to the base, just be mindful that it will require you to calculate the gap for the separator. There are some example photos in the dev folder that might help you visualize the set-up. 
+
+The width of each individual digit is 50 pixels. As such, the tens place of the hours is placed at (0,0). The ones place is placed at (50,0). The separator is placed at (100,0). Minutes are placed at (150, 0), and (200,0). The same principle applies to the visual timer shell with seconds added. Just increasing the x value by the width of each element for each additional place. Take a peek at the surfaces.txt code of the default shells to see the formatting for each place.
+
+While the digits and separator are the same width in the default visual timer shells; they do not have to be for your visual timer shell. That is, all the digits need to be the same width, but the separator can be a different width. 
+
+As an example, if you wanted to make a visual timer without seconds where each element has a width of 80 pixels:
+
+Base: 400 px wide
+
+Coordinates
+Hours (tens place): (0,0)
+Hours (ones place): (80, 0)
+Separator (if seperate from base): (160, 0)
+Minutes (tens place): (240,0)
+Minutes (ones place): (320,0)
+
+As a last note, I made the base for the default shell to have a 1% opacity black layer in order for the entirety of the timer to be click and draggable instead of just the numbers. Fully transparent areas can't be clicked and dragged around.

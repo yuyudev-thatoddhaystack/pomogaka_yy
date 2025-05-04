@@ -1,0 +1,213 @@
+OnSecondChange : all {
+
+    //shell changing
+    
+    if visualshell == 0 {
+        surface = "\1\s[10]\0\s[0]"
+        
+        if Flag("pomoOn") || Flag("pomoBreakOn"){
+            pomoArray[8]--
+        }
+    } else {
+    
+        if Flag('shellQueued') && reference3 != 0{
+            RemoveFlag("shellQueued")
+            "%(surface)"
+        } elseif (reference3 == 0){
+            if Flag("shellQueued") == 0; MiscFlags ,= "shellQueued"
+            LOGGING("timerraise")
+            ForceChange
+        }
+        
+
+        
+
+    
+        if !Flag("pomoOn") && !Flag("pomoBreakOn") {
+        
+            if (hasseconds) {
+                surface = "\1\s[10]\0\s[0]\i[0]\i[10]\i[20]\i[30]\i[40]\i[50]"
+            } else {
+                surface = "\1\s[10]\0\s[0]\i[0]\i[10]\i[20]\i[30]"
+            }
+            
+        } else {
+            OnCalcSurface
+            pomoArray[8]--
+            "%(surface)"
+        }
+
+    }
+    
+   --
+    
+
+
+    //pomo stuff goes here
+    
+    if (reference3 == 0 && pomoArray[5] == GETSECCOUNT) {
+        MiscFlags ,= "pomoQueued"
+    } elseif reference3 != 0{
+        if (Flag("pomoOn") && pomoArray[5] == GETSECCOUNT) || (Flag("pomoOn") && Flag("pomoQueued")) {
+            RemoveFlag("pomoOn")
+            RemoveFlag("pomoQueued")
+            todaypomos++
+            totalpomos++
+            
+            
+            case pomoArray[2]
+              {
+                    when "reg" //25 min
+                    {
+                        totalmins = totalmins + 25
+                        todaymins = todaymins + 25
+                    }
+                    when "double" //50 min
+                    {
+                        totalmins = totalmins + 50
+                        todaymins = todaymins + 50
+                    }
+                    when "quad" //100 min
+                    {
+                        totalmins = totalmins + 100
+                        todaymins = todaymins + 100
+
+                    } 
+                    when "customOne"
+                    {	
+                        totalmins = totalmins + customPomoOne[0]
+                        todaymins = todaymins + customPomoOne[0]
+
+                    }
+                    when "customTwo"
+                    {	
+                        totalmins = totalmins + customPomoTwo[0]
+                        todaymins = todaymins + customPomoTwo[0]
+                    }
+                    others //customOneOff
+                    {
+                        totalmins = totalmins + pomoArray[3]
+                        todaymins = todaymins + pomoArray[3]
+
+                        
+                    }
+              }
+              
+            if (hasseconds) {
+                surface = "\1\s[10]\0\s[0]\i[0]\i[10]\i[20]\i[30]\i[40]\i[50]"
+            } else {
+                surface = "\1\s[10]\0\s[0]\i[0]\i[10]\i[20]\i[30]"
+            }
+            
+    
+            "%(surface)%(notification_sound)Your work session is over. \w8\w8\w8"
+            --
+            if continuousPomo == "Off" && continuousSessions < 0 {
+                "\x\c"
+            }
+            --
+            
+            OnPomoOver
+        }
+        
+        //ditto
+        if Flag("pomoBreakOn") && pomoArray[5] == GETSECCOUNT  {
+            RemoveFlag("pomoBreakOn")
+            if (hasseconds) {
+                surface = "\1\s[10]\0\s[0]\i[0]\i[10]\i[20]\i[30]\i[40]\i[50]"
+            } else {
+                surface = "\1\s[10]\0\s[0]\i[0]\i[10]\i[20]\i[30]"
+            }
+            "%(surface)%(notification_sound)\_qYour break is over. \w8\w8\w8"
+            --
+            if continuousPomo == "Off" && continuousSessions < 0 {
+                "\x\c"
+            }
+            --
+            OnPomoEnd
+        }
+    }
+    
+    
+}
+OnMinuteChange{
+
+    //broadcast pomostats once an hour
+    if minute == 0 {
+        if hour == resettime{
+            todaypomos = 0
+            todaymins = 0
+        }
+        "\![notifyother,__SYSTEM_ALL_GHOST__,OnPomoStatsReceive,%(totalpomos),%(totalmins),%(todaypomos),%(todaymins)]"
+    }
+    
+
+    
+
+}
+
+OnCalcSurface {
+
+    //testing pomo ttimer
+    _secones = -1
+    _sectens = -1
+    _mintens = -1
+    _minones = -1
+    _secones = (timer%60)%10
+    _sectens = (timer%60)/10
+    _mintens = (timer/60)/10
+    _minones = (timer/60)%10
+    timer--
+    //"\0\s[0]\i[%(_mintens)]\i[1%(_minones)]\i[2%(_sectens)]\i[3%(_secones)]"
+    if timer < 0 {
+        timer = 300
+    }
+
+    _seconds = pomoArray[8]
+    _hrs = _seconds/3600 
+    _hourones = (_seconds/3600)%10
+    _hourtens = ((_seconds/3600)/10)%10
+    if (_hrs < 1) {
+        _mintens = ((_seconds/60)/10)%10
+        _minones = (_seconds/60)%10
+    } else {
+        _r = FLOOR(_seconds / 3600)
+        _seconds = _seconds - (_r * 3600)
+        _mintens = ((_seconds/60)/10)%10
+        _minones = (_seconds/60)%10
+    }
+    _secones = (_seconds%60)%10
+    _sectens = (_seconds%60)/10
+    
+    if _minones < 1 && pomoArray[8] > 0 && !hasseconds {
+        
+        _minones+=1
+    
+    }
+    
+    if hasseconds {
+        surface = "\1\s[10]\0\s[0]\i[%(_hourtens)]\i[1%(_hourones)]\i[2%(_mintens)]\i[3%(_minones)]\i[4%(_sectens)]\i[5%(_secones)]"
+    } else {
+        surface = "\1\s[10]\0\s[0]\i[%(_hourtens)]\i[1%(_hourones)]\i[2%(_mintens)]\i[3%(_minones)]"
+    }
+    
+    /** what was this for lol
+    if (_seconds%60 == 0 || _seconds < 1){
+        "%(surface)"
+    }
+    **/
+}
+
+ForceChange : all {
+
+    SHIORI3FW.LastTalk 
+    
+    --
+    LOGGING("====================================================================")
+    _intervals = RE_GETSTR(RE_GREP(surface, "\\i\[.*?\]\\i\[.*?\]\\i\[.*?\]\\i\[.*?\]"))
+    LOGGING("%(_intervals)")
+    LOGGING("%(surface)")
+    --
+    "%(_intervals)"
+    
+}

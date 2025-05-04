@@ -1,0 +1,28 @@
+Setting up your ghost to receive pomogaka stats should be fairly easy. Once an hour, at the top of the hour, pomogaka broadcasts stats as a notifyother command to all open ghosts, calling the event "OnPomoStatsReceive" and passing several variables to it. 
+
+You can also have your ghost ping pomogaka at any time using "\![raiseother,Pomogaka,OnPomoStatsBroadcast]", and it will return the same data as the hourly ping, but with a raiseother command so you can have your ghost comment on it.
+
+Pomogaka will also broadcast stats as a notifyother command to a ghost that is booted or changed to while pomogaka is open.
+
+reference0 is the total amount of sessions the user has done
+reference1 is the total amount of minutes the user has spent in sessions
+reference2 is the amount of sessions the user has done today
+reference3 is the amount of minutes the user has spent in sessions today
+
+Daily amounts are reset at midnight by default, but users can change the daily reset time at will. 
+
+An example implementation in a ghost that uses YAYA could look like this:
+
+OnPomoReceiveStats {
+    
+    _dailysessions = reference2
+    _dailyminutes = reference3
+    
+    //This will display only if the ghost pings pomogaka directly, and not on the hourly/boot notifications
+    if _dailysessions > 8 || _dailyminutes > 200 {
+        "\0\s[0]You've been really focused today,\w4 %(username)."
+    }
+    
+}
+
+Something like that! Of course, you could get really creative, like storing the stats in a variable to keep track of a "high score" of sorts, or have your ghost celebrate the user for reaching certain milestones. Whatever you want really. If theres another stat you want me to broadcast/keep track of for your ghosts needs, shoot me an email at yuyugamedev@gmail.com :-)

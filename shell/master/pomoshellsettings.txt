@@ -1,0 +1,2 @@
+visual_shell,0
+has_seconds,0

@@ -1,0 +1,97 @@
+
+OnFirstBoot
+{
+	//If you add variables, make sure to initialize them here!
+	//Note - I haven't added anything about username or pronouns here because it's all handled by the SSP prefs
+	MiscFlags = IARRAY	 //For the flag system
+	
+    //pomo stuff
+	pomoArray = IARRAY
+	continuousPomo = "Off"
+	successivePomos = 0
+	customPomoOne = IARRAY //work,break,long break
+	customPomoTwo = IARRAY //work,break,long break
+	continuousSessions = -1
+    totalpomos = 0
+    totalmins = 0
+    todaypomos = 0
+    todaymins = 0
+    lastclosed = IARRAY
+    visualshell = 0
+    surface = "\1\s[10]\0\s[0]"
+    resettime = "0" //daily reset hour
+    
+	"%(surface)Thank you for downloading Pomogaka. To begin a work session, double click on the tomato to open the menu."
+}
+OnInitialize
+{
+	//If you want some variables to reset on boot, put them here. This event will happen even if you add other events like OnGhostChanged
+	//OnInitialize is a NOTIFY event! That means it cannot return scripts. This event is only meant for things like variable changes. See this page on Ukadoc for more info: https://ukagakadreamteam.github.io/ukadoc/manual/spec_shiori3.html
+	
+	//If you add new variables in updates, I recommend initializing them like so:
+	//if !ISVAR("NewVariable"); NewVariable = 0
+	//This means that it will only set the new variable if the user doesn't already have it, so that their variables don't get overwritten
+	
+	if reference0 != "reload" //For things you want to reset EXCEPT when just reloading; a convenience for you the dev, basically
+	{
+		pomoArray = IARRAY //reset pomodoro stuff
+        RemoveFlag("pomoBreakOn")
+        RemoveFlag("pomoOn")
+        
+        _nowArray = GETTIME()
+        
+        if (GETSECCOUNT(lastclosed) - GETTIME(_nowArray) >= 90000) { //reset dailies if a full 24 hrs have passed
+            todaypomos = 0
+            todaymins = 0
+
+        } elseif (lastclosed[0] < _nowArray [0]) { //reset dailies if now year greater than lastclosed year
+            todaypomos = 0
+            todaymins = 0
+        } elseif (lastclosed[1] < _nowArray [1]){ //reset if now month greater than lastclosed month
+            todaypomos = 0
+            todaymins = 0
+        } elseif (lastclosed[2] < _nowArray [2]){ //reset if now day greater than lastclosed day
+            todaypomos = 0
+            todaymins = 0
+        }
+        
+
+    }
+    
+        if visualshell == 0 {
+            surface = "\1\s[10]\0\s[0]"
+        } else {
+       
+            surface = "\1\s[10]\0\s[0]\i[0]\i[10]\i[20]\i[30]"
+
+        }
+}
+
+OnBoot
+{
+	_temp = SHIORI3FW.UserBirthday
+	_user_birthday = "%(_temp[1])/%(_temp[2])" //M/D, if you want it D/M you can switch it around
+	_today = "%(month)/%(day)" //Again, switch this around if using D/M
+	
+	"%(surface)"
+	--
+    OnCalcSurface
+    "%(surface)Time to get to work, %(username).\w8\w8\w8\w8"
+}
+
+OnClose
+{
+    lastclosed = GETTIME()
+    _s = "s"
+    if todaypomos == 1 {
+        _s = ""
+    }
+    _ms = "s"
+    if todaymins == 1 {
+        _ms = ""
+    }
+    --
+	"%(surface)You completed %(todaypomos) work session%(_s) today, and worked for %(todaymins) minute%(_ms)."
+	--
+	"\w8\w8\-" //This is what makes the ghost close (after a short pause), do not remove the \- , and MAKE SURE you don't use a \e before this point or it won't work
+}
