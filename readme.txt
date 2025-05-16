@@ -36,3 +36,12 @@ Code for sound effects was taken from Hydrate by Zichqec (https://ukagaka.zichqe
 
 "Announcement" and "Ping" SFX by Universfield on Pixabay: https://pixabay.com/users/universfield-28281460/
 "Jingle" SFX by Notification_Message on Pixabay https://pixabay.com/users/notification_message-47259947/
+
+Version History
+
+5/16/25 - v1.1
+    Edited default visual timer shells to have better contrast on light backgrounds
+    Fixed some bugs with visual timer shells not showing up properly on a reload
+    
+5/3/25 - v1.0 
+    Initial release
