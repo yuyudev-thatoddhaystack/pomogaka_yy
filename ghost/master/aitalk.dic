@@ -30,6 +30,10 @@ OnSecondChange : all {
             } else {
                 surface = "\1\s[10]\0\s[0]\i[0]\i[10]\i[20]\i[30]"
             }
+            if Flag("init") == 1 {
+                "%(surface)"
+                RemoveFlag("init")
+            }
             
         } else {
             OnCalcSurface

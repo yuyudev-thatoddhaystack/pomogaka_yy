@@ -109,10 +109,10 @@ OnNotifyShellInfo : all {
             visualshell = 0
             hasseconds = 0
         }
-        
+        if Flag("init") == 0; MiscFlags ,= "init"
 }
 
-OnShellChanged{
+OnShellChanged : all{
 
     "%(surface)"
     
@@ -125,6 +125,12 @@ OnShellChanged{
         }
     }
 
+
+}
+
+OnDestroy : all{
+
+    OnCalcSurface
 
 }
 

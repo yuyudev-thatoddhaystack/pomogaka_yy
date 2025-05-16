@@ -57,14 +57,8 @@ OnInitialize
         
 
     }
-    
-        if visualshell == 0 {
-            surface = "\1\s[10]\0\s[0]"
-        } else {
-       
-            surface = "\1\s[10]\0\s[0]\i[0]\i[10]\i[20]\i[30]"
-
-        }
+    OnCalcSurface
+    if Flag("init") == 0; MiscFlags ,= "init"
 }
 
 OnBoot
