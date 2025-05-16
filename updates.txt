@@ -1,6 +1,6 @@
 charset,OSNative
 file,install.txt6143792bb42fe8bd55b9dc3391aaf1aesize=65date=2024-05-15T20:23:39
-file,readme.txt563c3ad8155a4e1629e9f77042fca64dsize=1823date=2025-05-02T17:11:13
+file,readme.txt642b1f3cdb7c8002386565446cfc729dsize=2070date=2025-05-16T19:28:57
 file,thumbnail.pna770d9c95b454fbb8b55a4be254a8d047size=3803date=2024-05-16T12:30:22
 file,thumbnail.png12531983077611f24d1b2fc534cc7993size=71437date=2025-05-02T17:19:07
 file,for_devs/making_pomogaka_shells.txtcef95f277c1e129a3d7a38b5e050f027size=3281date=2025-05-02T15:16:29
